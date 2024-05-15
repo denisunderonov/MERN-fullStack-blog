@@ -5,18 +5,17 @@ export default (req, res, next) => {
 
   if (token) {
     try {
-      const decoded = jwt.verify(token, 'secret123');
+      const decoded = jwt.verify(token, "secret123");
       req.userId = decoded._id;
       next();
     } catch (error) {
-        return res.status(403).json({
-          message: "Нет доступа"
-        });
+      return res.status(403).json({
+        message: "Нет доступа",
+      });
     }
   } else {
     res.json({
-        "message": "Токен не найден"
+      message: "Токен не найден",
     });
   }
-
 };
